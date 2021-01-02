@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
-import Aux from '../../../hoc/Auxilary';
+import Aux from '../../../hoc/Auxilary/Auxilary';
 import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
+    // This could be a functional component, doesnt have to be a class.
+    
     componentDidUpdate () {
         console.log("-- Did Update --");
     }
