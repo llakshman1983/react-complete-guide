@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import Aux from '../../../hoc/Auxilary'
-import Button from '../../UI/Button/Button'
+import Aux from '../../../hoc/Auxilary';
+import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
-    const ingredientSummary = Object.keys(props.ingredients).map(igKey => {
+class OrderSummary extends Component {
+    componentDidUpdate () {
+        console.log("-- Did Update --");
+    }
+
+    render() {
+
+        const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
+            return (
+                <li>
+                    <span style={{textTransform: 'capitalize'}}>{igKey}</span>: 
+                    {this.props.ingredients[igKey]}
+                </li>)
+        });
+
         return (
-            <li>
-                <span style={{textTransform: 'capitalize'}}>{igKey}</span>: 
-                {props.ingredients[igKey]}
-            </li>)
-    });
-    return (
-        <Aux>
-            <h3>Your Order</h3> 
-            <p>Delicious Burger with ingredients</p>
-            <u1>
-                {ingredientSummary}
-            </u1>
-            <p>Continue to Checkout</p>
-            <p><strong>Price: $ {props.price}</strong></p>
-            <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
-            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
-        </Aux>
-    );
+            <Aux>
+                <h3>Your Order</h3> 
+                <p>Delicious Burger with ingredients</p>
+                <u1>
+                    {ingredientSummary}
+                </u1>
+                <p>Continue to Checkout</p>
+                <p><strong>Price: $ {this.props.price}</strong></p>
+                <Button btnType="Danger" clicked={this.props.purchaseCancelled}>CANCEL</Button>
+                <Button btnType="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button>
+            </Aux>
+        );
+    }
+    
+   
 }
 
-export default orderSummary;
+export default OrderSummary;
