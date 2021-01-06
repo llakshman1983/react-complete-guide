@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/* Burger Builder */
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -15,3 +17,57 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+/* Ajax Axiom Requests */
+/* 
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import classes from './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+
+import axios from 'axios';
+
+// Default Configuration 
+// axios.defaults.baseURL='https://jsonplaceholder.typicode.com/';
+//axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+
+// -----Request Interceptor---- 
+//Shared across all files
+var myReqInterceptor = axios.interceptors.request.use(request => {
+  // If request is not returned, we are blocking the request.
+  console.log('[REQUEST] AXIOS INTERCEPTOR: ', request);
+  // We can also edit request
+  return request;
+}, error => {
+    console.log('[REQUEST] AXIOS INTERCEPTOR ERROR: ', error);
+    return Promise.reject(error);
+});
+
+// -----Response Interceptor---- 
+var myRespInterceptor = axios.interceptors.response.use(response => {
+  // If response is not returned, we are blocking the response.
+  console.log('[RESPONSE] AXIOS INTERCEPTOR: ', response);
+  // We can also edit request
+  return response;
+}, error => {
+    console.log('[RESPONSE] AXIOS INTERCEPTOR ERROR: ', error);
+    return Promise.reject(error);
+});
+
+//axios.interceptors.request.eject(myReqInterceptor);
+//axios.interceptors.response.eject(myRespInterceptor);
+
+ // axios.interceptors.request.use(function () {...});
+// axios.interceptors.request.eject(myInterceptor);
+
+
+
+
+ReactDOM.render( <App />, document.getElementById( 'root' ) );
+registerServiceWorker();
+
+*/
