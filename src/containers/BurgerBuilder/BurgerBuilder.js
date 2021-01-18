@@ -113,33 +113,7 @@ class BurgerBuilder extends Component {
    
     purchaseContinueHandler = () => {
      /* Commented for adding route */
-     /* 
-        this.setState({loading: true});       
-        const burgerOrder = {
-            ingredients: this.state.ingredients,
-            // Recalculate at server side
-            price: this.state.totalPrice,
-            customer: {
-                name: 'I J',
-                address: {
-                    street: '111 W SIDE Dr',
-                    zip: '10020',
-                    country: 'USA'
-                },
-                email: 'IJ@gmail.com',
-            },
-            delivery: 'Pickup'                
-        }       
-        axios.post('/orders.json', burgerOrder).then(response => {
-            //console.log(response);
-            // alert('Order Placed. Thank You.');
-            this.setState({loading: false, purchasing: false});
-            
-        }).catch(error => {
-            this.setState({loading: false, purchasing: false});
-            console.log(error);
-        });
-         */
+     
         //this.props.history.push('/checkout');
 
         const queryParams = [];
@@ -147,6 +121,7 @@ class BurgerBuilder extends Component {
             console.log('-- this.state.ingredients -- ', i);
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
