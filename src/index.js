@@ -8,7 +8,8 @@ import {BrowserRouter} from 'react-router-dom';
 
 
 const app = (
-  <BrowserRouter>
+  /* If we serve app directly from domain, we can skip basename. Such as www.orderburger.com */
+  <BrowserRouter basename="/burger">
     <App/>
   </BrowserRouter>
 );

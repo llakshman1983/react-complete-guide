@@ -1,24 +1,67 @@
-import React  from 'react'
+import React  from 'react';
 import classes from './Input.css';
 
 const Input = (props) => {
-    let inputElem = null;
-    
-    switch(props.inputType) {
-        case('text'):
-            inputElem = <input {...props} className={classes.InputElement}/>;
+    let inputElement = null;
+    const inputClasses = [classes.InputElement];
+
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push(classes.Invalid);
+    }
+
+   /*  let validationError = null;
+    if (props.invalid && props.touched) {
+        validationError = <p>Please enter a valid value!</p>;
+    }
+    */
+
+    switch(props.elementType) {       
+        case('input'):
+            inputElement = <input 
+                className={inputClasses.join(' ')} 
+                {...props.elementConfig} 
+                onChange={props.changed}
+                value={props.value}/>;
             break;
         case('textarea'):
-            inputElem = <textarea {...props} className={classes.InputElement}/>;
+            inputElement = <textarea 
+                className={classes.InputElement}
+                {...props.elementConfig}
+                onChange={props.changed}
+                value={props.value}/>;
             break;
-        default:
-            inputElem = <input {...props} className={classes.InputElement} />;
+        case ('select'):                       
+            inputElement = (
+                <select
+                    className={classes.InputElement}
+                    onChange={props.changed}
+                    value={props.value}>
+                    {props.elementConfig.options.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.displayValue}
+                        </option>
+                    ))}
+                </select>
+                );
+            break;
 
-        return (
-            <div className={classes.Input}>
-                <label className={classes.Label}>{props.label}</label>
-                {inputElem}
-            </div>
-        );
+            
+        default:
+            console.log("Element Type: ", props.elementType);
+            inputElement = <input 
+                className={classes.InputElement}
+                {...props.elementConfig}
+                onChange={props.changed}
+                value={props.value}/>;       
     }
+
+    return (
+        <div className={classes.Input}>
+            <label className={classes.Label}>{props.label}</label>
+            {inputElement}
+            {/* validationError */}
+        </div>
+    );
 }
+
+export default Input;
