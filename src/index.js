@@ -5,13 +5,19 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './store/reducer';
 
+const store = createStore(reducer);
 
 const app = (
   /* If we serve app directly from domain, we can skip basename. Such as www.orderburger.com */
-  <BrowserRouter basename="/burger">
-    <App/>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter basename="/burger">
+      <App/>
+    </BrowserRouter>
+  </Provider>
 );
 
 
