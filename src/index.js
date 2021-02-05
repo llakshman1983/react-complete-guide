@@ -6,11 +6,19 @@ import registerServiceWorker from './registerServiceWorker';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import reducer from './store/reducer';
+import {createStore, applyMiddleware, compose} from 'redux';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import thunk from 'redux-thunk';
 
-const store = createStore(reducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const store = createStore(burgerBuilderReducer,  
+  composeEnhancers(applyMiddleware(thunk)));
+   // Redux DevTools - supports Time Travelling..
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+  // Currently no Middleware used.
+  
 const app = (
   /* If we serve app directly from domain, we can skip basename. Such as www.orderburger.com */
   <Provider store={store}>
